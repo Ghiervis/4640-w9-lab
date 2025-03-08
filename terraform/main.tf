@@ -21,7 +21,12 @@ locals {
 # get the most recent version of your AMI created with packer template
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
 data "aws_ami" "ubuntu" {
-  # COMPLETE ME
+  filter {
+    name   = "name"
+    values = ["packer-ansible-nginx"]
+  }
+  owners      = ["self"]
+  most_recent = true
 }
 
 # Create a VPC
@@ -132,7 +137,7 @@ resource "aws_vpc_security_group_egress_rule" "web-egress" {
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
-  key_name               = "aws-4640"
+  key_name               = "terraform"
   vpc_security_group_ids = [aws_security_group.web.id]
   subnet_id              = aws_subnet.web.id
 
@@ -150,4 +155,3 @@ output "instance_ip_addr" {
     "dns_name"  = aws_instance.web.public_dns
   }
 }
-
