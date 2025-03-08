@@ -16,3 +16,9 @@ terraform apply
 ```bash
 ../scripts/delete_lab_key
 ```
+
+##Clean up
+
+```bash
+terraform destroy (terraform directory)
+```
