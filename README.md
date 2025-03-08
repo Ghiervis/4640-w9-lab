@@ -1,56 +1,18 @@
 # 4640-w9-lab-start-w25
 
-See lab instructions on D2L
+To generate a Packer image from the project root, execute the following commands in order. Ensure that Packer, Terraform, and Ansible are installed on your system beforehand:
 
-# ACIT 4640 - Week 9 Lab
-
-## Requirements
-
-Before proceeding, ensure the following tools are installed and configured:
-
-- AWS CLI (with valid credentials)
-- Packer
-- Terraform
-- Git
-
-## Execution Steps
-
-### 1. Create an AMI using Packer
-
-Navigate to the `packer` directory and execute the following:
-
-```sh
+```bash
+./scripts/import_lab_key "your SSH public key"
 cd packer
 packer init .
 packer build .
-```
-
-### 2. Deploy Infrastructure with Terraform
-
-Move to the `terraform` directory and apply the configuration:
-
-```sh
 cd ../terraform
 terraform init
 terraform apply
 ```
 
-### 3. Verify the Deployment
-
-After Terraform completes, verify that the instance is up and running:
-
-- Connect via SSH using the displayed IP address.
-- Confirm Nginx is running:
-  ```sh
-  systemctl status nginx
-  ```
-- Open a browser and enter the public IP to check the Nginx welcome page.
-
-### 4. Cleanup
-
-To tear down the deployed resources, run:
-
-```sh
-terraform destroy
+*(Optional)* To remove the lab key, run:
+```bash
+../scripts/delete_lab_key
 ```
-
